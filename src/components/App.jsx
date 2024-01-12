@@ -27,7 +27,7 @@ export class App extends Component {
 
   componentDidUpdate(_, prevState) {
     if (prevState.contacts.length !== this.state.contacts.length) {
-      toast.info('New contact was added');
+      toast.info('Contact list was changed');
       localStorage.setItem('USERS_DATA', JSON.stringify(this.state.contacts));
     }
   }
