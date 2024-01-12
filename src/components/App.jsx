@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { HeaderTwo, MainContainer } from './App.styled';
+import { toast } from 'react-toastify';
 
 import { Form } from './Form/Form';
 import { ContactsList } from './ContactsList/ContactsList';
@@ -16,6 +17,20 @@ export class App extends Component {
 
     filter: '',
   };
+
+  componentDidMount() {
+    const parsedContacts = JSON.parse(localStorage.getItem('USERS_DATA'));
+    if (parsedContacts?.length) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts.length !== this.state.contacts.length) {
+      toast.info('Contacts List was changed');
+      localStorage.setItem('USERS_DATA', JSON.stringify(this.state.contacts));
+    }
+  }
 
   handleChange = e => {
     const { name, value } = e.target;
