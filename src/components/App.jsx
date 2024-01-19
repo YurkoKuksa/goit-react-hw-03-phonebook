@@ -40,7 +40,7 @@ export class App extends Component {
   handleAddName = newObject => {
     const { contacts } = this.state;
     const isNameExists = contacts.some(
-      contact => contact.name === newObject.name
+      contact => contact.name.toLowerCase() === newObject.name.toLowerCase()
     );
 
     if (isNameExists) {
